@@ -14,6 +14,14 @@ axios.interceptors.request.use(config => {
 
 export class Service {
 
+    public async validar(): Promise<void> {
+        if (!LocalStorage.has('session')) {
+            throw new Error('Usuário não autenticado');
+        }
+
+        await axios.get('/validar');
+    }
+
     public async login(username: string, password: string): Promise<void> {
         const response = await axios.post('/login', { username, password });
         const token = response.data['token'];
