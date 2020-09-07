@@ -15,7 +15,7 @@
 
                         <q-card-actions vertical>
                             <q-btn color="primary" type="submit">Entrar</q-btn>
-                            <q-btn>Criar uma conta</q-btn>
+                            <q-btn @click="cadastro">Criar uma conta</q-btn>
                         </q-card-actions>
                     </q-form>
                 </q-card>
@@ -50,6 +50,10 @@ export default class Login extends Vue {
                 this.$q.notify({ color: 'negative', message });
             }
         }).finally(() => this.$q.loading.hide());
+    }
+
+    private cadastro(): void {
+        this.$router.push({ name: 'cadastro' });
     }
 
 }

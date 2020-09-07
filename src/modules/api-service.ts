@@ -20,6 +20,12 @@ export class Service {
         LocalStorage.set('session', { token });
     }
 
+    public async cadastrar(username: string, password: string, email: string, nome: string): Promise<void> {
+        const response = await axios.post('/user', { username, password, email, nome });
+        const token = response.data['token'];
+        LocalStorage.set('session', { token });
+    }
+
     public async getMe(): Promise<User> {
         return (await axios.get('/me')).data;
     }
