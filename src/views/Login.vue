@@ -34,8 +34,22 @@ export default class Login extends Vue {
     private usuario: string = '';
     private senha: string = '';
 
+    private mounted(): void {
+        if (this.$q.localStorage.has('session')) {
+            this.$router.push({ name: 'home' });
+        }
+    }
+
     private submit(): void {
-        
+        this.$q.loading.show();
+        this.$service.login(this.usuario, this.senha).then(() => {
+            this.$router.push({ name: 'home' });
+        }).catch(error => {
+            if (error.response) {
+                const message = error.response.data['mensagem'];
+                this.$q.notify({ color: 'negative', message });
+            }
+        }).finally(() => this.$q.loading.hide());
     }
 
 }
