@@ -12,7 +12,7 @@
                                     <q-item-label caption v-text="email" />
                                 </q-item-section>
                             </q-item>
-                            <q-item clickable>
+                            <q-item clickable @click="sair">
                                 <q-item-section avatar>
                                     <q-icon name="mdi-exit-to-app" color="negative"></q-icon>
                                 </q-item-section>
@@ -72,6 +72,11 @@ export default class Home extends Vue {
         this.$service.getUsers().then(users => {
             this.users = users;
         });
+    }
+
+    private sair(): void {
+        this.$q.localStorage.remove('session');
+        this.$router.push({ name: 'login' });
     }
 
 }
