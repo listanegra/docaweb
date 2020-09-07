@@ -20,6 +20,22 @@ export class Service {
         LocalStorage.set('session', { token });
     }
 
+    public async getMe(): Promise<User> {
+        return (await axios.get('/me')).data;
+    }
+
+}
+
+export declare interface User {
+
+    readonly _id: string;
+
+    readonly email: string;
+
+    readonly nome: string;
+
+    readonly data_criacao: number;
+
 }
 
 export default new Service();
