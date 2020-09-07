@@ -24,6 +24,13 @@ export class Service {
         return (await axios.get('/me')).data;
     }
 
+    public async getUsers(limit: number = 20, offset: number = 0): Promise<User[]> {
+        const response = await axios.get('/user/users', {
+            params: { limit, offset }
+        });
+        return response.data;
+    }
+
 }
 
 export declare interface User {
